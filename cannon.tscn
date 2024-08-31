@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://t1t4a8j630s2"]
+
+[ext_resource type="Script" path="res://cannon.gd" id="1_21oox"]
+[ext_resource type="Texture2D" uid="uid://ij72rull4khq" path="res://assets/cannon.png" id="1_tx1g5"]
+[ext_resource type="PackedScene" uid="uid://doqy2gmrtnft5" path="res://blue_shield.tscn" id="4_c1scm"]
+[ext_resource type="PackedScene" uid="uid://cws4kqi703qxd" path="res://hp.tscn" id="4_tx736"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_13yyo"]
+size = Vector2(317, 187)
+
+[node name="Cannon" type="StaticBody2D"]
+disable_mode = 2
+collision_mask = 2
+script = ExtResource("1_21oox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(180, 541)
+scale = Vector2(0.594739, 0.568805)
+texture = ExtResource("1_tx1g5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(204.5, 536.5)
+shape = SubResource("RectangleShape2D_13yyo")
+
+[node name="CannonTimer" type="Timer" parent="."]
+wait_time = 0.71
+autostart = true
+
+[node name="LaunchPosition" type="Marker2D" parent="."]
+position = Vector2(236, 478)
+
+[node name="HP" parent="." instance=ExtResource("4_tx736")]
+position = Vector2(141, 368)
+health = 100
+
+[node name="blue_shield" parent="." instance=ExtResource("4_c1scm")]
+position = Vector2(341, 469)
+
+[connection signal="timeout" from="CannonTimer" to="." method="_on_cannon_timer_timeout"]
+[connection signal="death" from="HP" to="." method="_on_hp_death"]

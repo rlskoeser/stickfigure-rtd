@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgeu71l0mqaxj"]
+
+[ext_resource type="Texture2D" uid="uid://bd10e0fvjmq2w" path="res://assets/stick-figure-guy_walk_1.png" id="1_0oj2a"]
+[ext_resource type="Script" path="res://stick_figure.gd" id="1_ydihq"]
+[ext_resource type="Texture2D" uid="uid://xfov0pgn1xpw" path="res://assets/stick-figure-guy_walk_2.png" id="2_5j5f4"]
+[ext_resource type="PackedScene" uid="uid://cws4kqi703qxd" path="res://hp.tscn" id="4_g7wia"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3ysmr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0oj2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_5j5f4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_04ij4"]
+radius = 1.0
+height = 202.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0bhe1"]
+radius = 24.0
+height = 200.0
+
+[node name="StickFigure" type="CharacterBody2D"]
+position = Vector2(-156, -151)
+collision_layer = 2
+collision_mask = 7
+input_pickable = true
+script = ExtResource("1_ydihq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(65.25, 95)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_3ysmr")
+frame = 1
+frame_progress = 0.645015
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(35, 90)
+shape = SubResource("CapsuleShape2D_04ij4")
+
+[node name="HP" parent="." instance=ExtResource("4_g7wia")]
+position = Vector2(48.25, -70)
+health = 25
+
+[node name="ClickArea" type="CollisionShape2D" parent="."]
+position = Vector2(62, 89)
+shape = SubResource("CapsuleShape2D_0bhe1")
+debug_color = Color(0.424197, 0.493717, 0.904326, 0.42)
+
+[connection signal="hit" from="." to="." method="_on_hit"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="death" from="HP" to="." method="_on_hp_death"]

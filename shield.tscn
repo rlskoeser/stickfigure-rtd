@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b12h6su10j811"]
+
+[ext_resource type="Texture2D" uid="uid://bstdj0vowl2ov" path="res://assets/stick-guy-shield.png" id="1_bbf6i"]
+[ext_resource type="Script" path="res://shield.gd" id="1_naxvo"]
+[ext_resource type="PackedScene" uid="uid://cws4kqi703qxd" path="res://hp.tscn" id="2_7raxu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l46il"]
+radius = 32.0
+height = 174.0
+
+[node name="Shield" type="Area2D"]
+collision_layer = 2
+collision_mask = 6
+script = ExtResource("1_naxvo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bbf6i")
+
+[node name="HP" parent="." instance=ExtResource("2_7raxu")]
+position = Vector2(-47, -132)
+health = 50
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 3)
+shape = SubResource("CapsuleShape2D_l46il")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="death" from="HP" to="." method="_on_hp_death"]

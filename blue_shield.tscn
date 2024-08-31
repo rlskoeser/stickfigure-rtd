@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://doqy2gmrtnft5"]
+
+[ext_resource type="Script" path="res://blue_shield.gd" id="1_1sk6e"]
+[ext_resource type="Texture2D" uid="uid://beckwa6rrcq2b" path="res://assets/cannon-shield.png" id="1_y8bml"]
+[ext_resource type="PackedScene" uid="uid://cws4kqi703qxd" path="res://hp.tscn" id="2_il2vv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dbusq"]
+radius = 92.6712
+height = 517.557
+
+[node name="blue_shield" type="StaticBody2D"]
+disable_mode = 2
+collision_mask = 2
+collision_priority = 2.0
+script = ExtResource("1_1sk6e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_y8bml")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 0
+position = Vector2(15, 13)
+shape = SubResource("CapsuleShape2D_dbusq")
+
+[node name="HP" parent="." instance=ExtResource("2_il2vv")]
+position = Vector2(-26, -214)
+health = 50
+
+[connection signal="death" from="HP" to="." method="_on_hp_death"]

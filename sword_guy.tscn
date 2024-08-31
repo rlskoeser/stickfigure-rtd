@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b850vwiej2rxe"]
+
+[ext_resource type="PackedScene" uid="uid://dgeu71l0mqaxj" path="res://stick_figure.tscn" id="1_o0u12"]
+[ext_resource type="Script" path="res://sword_guy.gd" id="2_3fl43"]
+[ext_resource type="PackedScene" uid="uid://sp73shuy8iru" path="res://sword.tscn" id="2_oeu51"]
+
+[node name="SwordGuy" instance=ExtResource("1_o0u12")]
+script = ExtResource("2_3fl43")
+
+[node name="HP" parent="." index="2"]
+position = Vector2(60, -69)
+
+[node name="Sword" parent="." index="3" instance=ExtResource("2_oeu51")]
+position = Vector2(30, 40)
+rotation = -0.127409
+scale = Vector2(0.75, 0.75)

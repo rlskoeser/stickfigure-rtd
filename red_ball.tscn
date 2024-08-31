@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bljyskro5l4x0"]
+
+[ext_resource type="PackedScene" uid="uid://bs31uqla2b4np" path="res://ball.tscn" id="1_08lrt"]
+[ext_resource type="Texture2D" uid="uid://dl2414bqv6ytf" path="res://assets/red-ball.png" id="2_tyicv"]
+
+[node name="red_ball" instance=ExtResource("1_08lrt")]
+damage = 25
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_tyicv")

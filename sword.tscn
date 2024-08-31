@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://sp73shuy8iru"]
+
+[ext_resource type="Script" path="res://sword.gd" id="1_3qtgg"]
+[ext_resource type="Texture2D" uid="uid://t0rn0eg7r7so" path="res://assets/sword.png" id="1_vnd07"]
+
+[sub_resource type="Animation" id="Animation_muuof"]
+resource_name = "attack"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.01, 0.310825, 0.739437),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.151844, -0.733038, -0.151844]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8r7qe"]
+_data = {
+"attack": SubResource("Animation_muuof")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jb76t"]
+size = Vector2(22, 135)
+
+[node name="Sword" type="Area2D"]
+rotation = -0.151844
+collision_layer = 2
+script = ExtResource("1_3qtgg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8r7qe")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -0.0523599
+texture = ExtResource("1_vnd07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -36.5)
+shape = SubResource("RectangleShape2D_jb76t")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
