@@ -7,7 +7,7 @@ on:
 env:
   GODOT_VERSION: 4.2.1
   EXPORT_NAME: stickfigure-rtd
-  PROJECT_PATH: .
+  PROJECT_PATH: stickfigure-rtd
 
 jobs:
   # export-windows:
@@ -78,7 +78,7 @@ jobs:
         run: |
           mkdir -v -p build/web
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Web" build/web/index.html
+          godot --headless --verbose --export-release "Web" ../build/web/index.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
