@@ -19,9 +19,11 @@ func _physics_process(delta):
 	var collide = move_and_collide(velocity * delta)
 	if (collide):
 		var body = collide.get_collider()
+
 		if "damage" in body:
 			$HP.take_damage(body.damage)
-			body.hit()
+			if body.has_method("hit"):
+				body.hit()
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

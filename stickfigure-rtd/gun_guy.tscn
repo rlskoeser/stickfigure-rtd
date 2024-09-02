@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://oj2458hw4fo7"]
+
+[ext_resource type="PackedScene" uid="uid://dgeu71l0mqaxj" path="res://stick_figure.tscn" id="1_bmbxn"]
+[ext_resource type="PackedScene" uid="uid://dtjxq6g8r7mbv" path="res://gun.tscn" id="2_4hrrn"]
+[ext_resource type="Script" path="res://gun_guy.gd" id="2_e3d3f"]
+
+[node name="GunGuy" instance=ExtResource("1_bmbxn")]
+script = ExtResource("2_e3d3f")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(34, 86)
+
+[node name="HP" parent="." index="2"]
+health = 13
+
+[node name="Gun" parent="." index="4" instance=ExtResource("2_4hrrn")]
+position = Vector2(2, 74)
+
+[node name="BulletLaunchPoint" type="Marker2D" parent="." index="5"]
+position = Vector2(6, 74)
