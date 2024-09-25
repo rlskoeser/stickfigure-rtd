@@ -2,18 +2,18 @@ extends Node
 
 var screen_size # Size of the game window.
 
-var ShieldGuy = preload("res://shield_guy.tscn")
-var SwordGuy = preload("res://sword_guy.tscn")
-var GunGuy = preload("res://gun_guy.tscn")
-
-
 var guys
-var original_lineup = [ShieldGuy, SwordGuy, GunGuy]
+var original_lineup
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	guys = original_lineup.duplicate()
+	pass
+	
+func go(lineup):	
+	guys = lineup.duplicate()
 	$Cannon.start()
+	$SpawnTimer.start()
+	$MessageTimer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -66,3 +66,7 @@ func _on_gun_shoot(Bullet, location):
 	var spawned_bullet = Bullet.instantiate()
 	spawned_bullet.position = location
 	add_child(spawned_bullet)
+
+func _on_chooser_go(chosen_lineup) -> void:
+	go(chosen_lineup)
+	remove_child($Chooser)

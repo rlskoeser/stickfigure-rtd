@@ -25,7 +25,6 @@ shape = SubResource("RectangleShape2D_13yyo")
 
 [node name="CannonTimer" type="Timer" parent="."]
 wait_time = 0.71
-autostart = true
 
 [node name="LaunchPosition" type="Marker2D" parent="."]
 position = Vector2(236, 478)

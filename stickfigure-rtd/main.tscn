@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfj68k8sy3do7"]
+[gd_scene load_steps=5 format=3 uid="uid://bfj68k8sy3do7"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_pbaoh"]
 [ext_resource type="PackedScene" uid="uid://t1t4a8j630s2" path="res://cannon.tscn" id="3_3a3fn"]
+[ext_resource type="PackedScene" uid="uid://ch6i200srns87" path="res://chooser.tscn" id="3_pd6wv"]
 
 [sub_resource type="SystemFont" id="SystemFont_d7nky"]
 
@@ -26,7 +27,6 @@ horizontal_alignment = 1
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
-autostart = true
 
 [node name="SpawnPosition" type="Marker2D" parent="."]
 position = Vector2(1943, 904)
@@ -37,8 +37,10 @@ position = Vector2(-20, 437)
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
-autostart = true
+
+[node name="Chooser" parent="." instance=ExtResource("3_pd6wv")]
 
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
 [connection signal="destroyed" from="Cannon" to="." method="_on_cannon_destroyed"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="go" from="Chooser" to="." method="_on_chooser_go"]

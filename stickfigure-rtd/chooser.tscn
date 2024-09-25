@@ -1,0 +1,134 @@
+[gd_scene load_steps=7 format=3 uid="uid://ch6i200srns87"]
+
+[ext_resource type="PackedScene" uid="uid://oj2458hw4fo7" path="res://gun_guy.tscn" id="1_4y1ey"]
+[ext_resource type="Script" path="res://chooser.gd" id="1_u3iuc"]
+[ext_resource type="PackedScene" uid="uid://cuckgvmgyddcn" path="res://shield_guy.tscn" id="2_ekr7g"]
+[ext_resource type="PackedScene" uid="uid://b850vwiej2rxe" path="res://sword_guy.tscn" id="3_f5i62"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ajcfd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wrfy"]
+
+[node name="Chooser" type="Node"]
+script = ExtResource("1_u3iuc")
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color(0, 0.784314, 0.462745, 1)
+polygon = PackedVector2Array(-1, -1, 1922, 1, 1919, 1077, 0, 1080)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 747.0
+offset_top = 118.0
+offset_right = 1093.0
+offset_bottom = 187.0
+theme_override_font_sizes/font_size = 50
+text = "pick your guys"
+
+[node name="Slots" type="Node" parent="."]
+
+[node name="Slot1" type="Polygon2D" parent="Slots"]
+position = Vector2(504.406, 240.18)
+scale = Vector2(0.898497, 0.909804)
+texture = SubResource("CanvasTexture_ajcfd")
+polygon = PackedVector2Array(5.22891, -0.734497, 269.229, -0.734497, 269.229, 255.266, 5.22889, 255.266)
+uv = PackedVector2Array(6.22595, 2, 266.661, 2, 268.887, 254.802, 5.11298, 255.901)
+
+[node name="Label" type="Label" parent="Slots/Slot1"]
+offset_left = 126.0
+offset_top = -46.0
+offset_right = 144.0
+offset_bottom = -1.0
+theme_override_font_sizes/font_size = 32
+text = "1"
+
+[node name="Slot2" type="Polygon2D" parent="Slots"]
+position = Vector2(801, 241)
+scale = Vector2(0.898497, 0.909804)
+texture = SubResource("CanvasTexture_ajcfd")
+polygon = PackedVector2Array(5.22891, -0.734497, 269.229, -0.734497, 269.229, 255.266, 5.22889, 255.266)
+uv = PackedVector2Array(6.22595, 2, 266.661, 2, 268.887, 254.802, 5.11298, 255.901)
+
+[node name="Label" type="Label" parent="Slots/Slot2"]
+offset_left = 126.0
+offset_top = -46.0
+offset_right = 144.0
+offset_bottom = -1.0
+theme_override_font_sizes/font_size = 32
+text = "2
+"
+
+[node name="Slot3" type="Polygon2D" parent="Slots"]
+position = Vector2(1089, 240)
+scale = Vector2(0.898497, 0.909804)
+texture = SubResource("CanvasTexture_ajcfd")
+polygon = PackedVector2Array(5.22891, -0.734497, 269.229, -0.734497, 269.229, 255.266, 5.22889, 255.266)
+uv = PackedVector2Array(6.22595, 2, 266.661, 2, 268.887, 254.802, 5.11298, 255.901)
+
+[node name="Label" type="Label" parent="Slots/Slot3"]
+offset_left = 126.0
+offset_top = -46.0
+offset_right = 144.0
+offset_bottom = -1.0
+theme_override_font_sizes/font_size = 32
+text = "3"
+
+[node name="Buttons" type="Node" parent="."]
+
+[node name="Button1" type="Button" parent="Buttons"]
+anchors_preset = -1
+anchor_left = 0.018
+anchor_top = 0.618
+anchor_right = 0.155
+anchor_bottom = 0.967
+offset_left = -0.560001
+offset_top = -0.440063
+offset_right = 0.399994
+offset_bottom = -0.360107
+theme_override_styles/hover = SubResource("StyleBoxFlat_2wrfy")
+
+[node name="ShieldGuy" parent="Buttons/Button1" instance=ExtResource("2_ekr7g")]
+position = Vector2(77, 59)
+speed = 0
+
+[node name="Button2" type="Button" parent="Buttons"]
+anchors_preset = -1
+anchor_left = 0.018
+anchor_top = 0.618
+anchor_right = 0.155
+anchor_bottom = 0.967
+offset_left = 398.44
+offset_top = -13.4401
+offset_right = 399.4
+offset_bottom = -13.3601
+
+[node name="SwordGuy" parent="Buttons/Button2" instance=ExtResource("3_f5i62")]
+position = Vector2(77, 62)
+speed = 0
+
+[node name="Button3" type="Button" parent="Buttons"]
+anchors_preset = -1
+anchor_left = 0.018
+anchor_top = 0.618
+anchor_right = 0.155
+anchor_bottom = 0.967
+offset_left = 1244.44
+offset_top = -11.4401
+offset_right = 1245.4
+offset_bottom = -11.3601
+
+[node name="GunGuy" parent="Buttons/Button3" instance=ExtResource("1_4y1ey")]
+position = Vector2(77, 63)
+speed = 0
+
+[node name="GoButton" type="Button" parent="."]
+offset_left = 1491.0
+offset_top = 291.0
+offset_right = 1594.0
+offset_bottom = 410.0
+theme_override_font_sizes/font_size = 81
+disabled = true
+text = "go"
+
+[connection signal="pressed" from="Buttons/Button1" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Buttons/Button2" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GoButton" to="." method="_on_go_button_pressed"]

@@ -19,7 +19,7 @@ func _process(delta):
 
 
 func start():
-	pass
+	$CannonTimer.start()
 	# position = $LaunchPosition.position
 	#show()
 	#$CollisionShape2D.disabled = false
