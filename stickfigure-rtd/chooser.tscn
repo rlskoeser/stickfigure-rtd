@@ -13,7 +13,9 @@
 script = ExtResource("1_u3iuc")
 
 [node name="Background" type="Polygon2D" parent="."]
-color = Color(0, 0.784314, 0.462745, 1)
+position = Vector2(-5.96046e-08, 119.889)
+scale = Vector2(1, 0.888992)
+color = Color(3.36915e-07, 0.564263, 0.327003, 1)
 polygon = PackedVector2Array(-1, -1, 1922, 1, 1919, 1077, 0, 1080)
 
 [node name="Label" type="Label" parent="."]

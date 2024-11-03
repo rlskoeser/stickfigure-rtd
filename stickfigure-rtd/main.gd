@@ -3,11 +3,17 @@ extends Node
 var screen_size # Size of the game window.
 
 var guys
-var original_lineup
+var level_num = 1
+var chooser = preload("res://chooser.tscn")
+var current_chooser
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	# add a new chooser
+	current_chooser = chooser.instantiate()
+	add_child(current_chooser)
+	# connect signal handler to *this* instance
+	current_chooser.connect("go", _on_chooser_go)
 	
 func go(lineup):	
 	guys = lineup.duplicate()
@@ -19,20 +25,34 @@ func go(lineup):
 func _process(_delta):
 	pass
 
-func reset():
+func play_level(next=false):
 	# reset to original lineup and restart spawn timer
-	guys = original_lineup.duplicate()
+	$Cannon/CannonTimer.stop()
 	$Cannon.reset()
-	$SpawnTimer.start()
-	
+		
 	# clear stick guys and balls still on the scene
 	for node in get_children():
 		if node.name.contains('Guy') or node.name.contains('ball') or node.name == "Bullet":
 			node.queue_free()
+			
+	if next:
+		# level number goes up
+		level_num = level_num + 1
+		$LevelLabel.set_text("Level %d" % level_num)
+		# cannon gets faster (but don't go negative)
+		$Cannon.launch_wait_min = max($Cannon.launch_wait_min - 0.5, 0.25)
+		$Cannon.launch_wait_max = max($Cannon.launch_wait_max - 1, 1)
+		
+	# add a new chooser after a delay
+	await get_tree().create_timer(1.0).timeout
+	current_chooser = chooser.instantiate()
+	add_child(current_chooser)
+	current_chooser.connect("go", _on_chooser_go)
 		
 func _on_cannon_destroyed():
-	reset() 
 	show_success()
+	# go to next level
+	play_level(true)
 
 func show_message(text):
 	$Message.text = text
@@ -45,12 +65,12 @@ func show_success():
 func _on_message_timer_timeout():
 	$Message.hide()
 
-
 func _on_spawn_timer_timeout():
 	# get the first guy from the list of guys and instantiate
 	var new_guy = guys.pop_front().instantiate(); 
 	# move to spawn position and add to scene
 	new_guy.position = $SpawnPosition.position
+	new_guy.connect("death", _on_guy_death)
 	if new_guy.name == "GunGuy":
 		for node in new_guy.get_children():
 			if node.name.contains('Gun'):
@@ -60,13 +80,30 @@ func _on_spawn_timer_timeout():
 	add_child(new_guy)
 	if guys:
 		$SpawnTimer.start()
-		
 
 func _on_gun_shoot(Bullet, location):
 	var spawned_bullet = Bullet.instantiate()
 	spawned_bullet.position = location
 	add_child(spawned_bullet)
+	
+func count_active_guys():
+	# clear stick guys and balls still on the scene
+	var count = 0
+	for node in get_children():
+		if node.name.contains('Guy'):
+			count += 1
+	return count
+
+func _on_guy_death(guy):
+	remove_child(guy)
+	var guy_count = count_active_guys()
+	# if all guys are dead and gone...
+	if guy_count == 0:
+		# restart current level instead of going to next level
+		show_message("Defeated. Try again")
+		play_level()
 
 func _on_chooser_go(chosen_lineup) -> void:
 	go(chosen_lineup)
-	remove_child($Chooser)
+	remove_child(current_chooser)
+	$Cannon.start()

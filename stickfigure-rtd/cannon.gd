@@ -65,6 +65,7 @@ func _on_hp_death():
 	
 func reset():
 	$HP.reset()
+	$blue_shield.off()
 
 func _on_shields_up():
 	$blue_shield.on()

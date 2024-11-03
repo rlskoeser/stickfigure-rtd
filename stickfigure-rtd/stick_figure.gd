@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 
 signal hit
+signal death
 
 @export var speed = 200 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
@@ -32,7 +33,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	pass
-	## if we hit something that does domage, subtract from hp
+	## if we hit something that does damage, subtract from hp
 	#print('stickfigure body entered:')
 	#print(body)
 	#if "damage" in body:
@@ -41,10 +42,9 @@ func _on_body_entered(body):
 	#else:  # assume for now we ran into the cannon
 		#speed = 0
 
-
 func _on_hp_death():
 	queue_free()
-
+	death.emit(self)
 
 func _on_hit():
 	pass # Replace with function body.
