@@ -15,16 +15,8 @@ func _process(delta):
 
 func attack():
 	attacking = true
-	#print("sword attack")
 	$AnimationPlayer.play("attack")
-	#if in_range:
-		#in_range.take_damage(damage)
-
 
 func _on_body_entered(body):
 	if attacking:
 		body.take_damage(damage)
-	#print('sword body entered')
-	#print(body)
-	##if body.name == "Cannon":
-	#in_range = body

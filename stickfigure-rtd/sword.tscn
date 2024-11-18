@@ -28,7 +28,7 @@ _data = {
 size = Vector2(22, 135)
 
 [node name="Sword" type="Area2D"]
-rotation = -0.151844
+rotation = -0.16996
 collision_layer = 2
 script = ExtResource("1_3qtgg")
 

@@ -17,7 +17,6 @@ func _ready():
 func _process(delta):
 	pass
 
-
 func start():
 	$CannonTimer.start()
 	# position = $LaunchPosition.position
@@ -46,9 +45,11 @@ func _on_cannon_timer_timeout():
 	# Create a new instance of the selected ball
 	var ball = choose_ball().instantiate()
 	# connect signal handler to *this* instance
-	ball.connect("shields_up", _on_shields_up)
+	if ball.name == "blue_ball":
+		ball.connect("shields_up", _on_shields_up)
 	# start at the configured launch position
 	ball.position = $LaunchPosition.position
+	
 	var velocity = Vector2.RIGHT.normalized() * ball.speed
 	ball.linear_velocity = velocity 
 	# add the ball to the Main scene.

@@ -8,11 +8,13 @@ var max_picks = 3
 var ShieldGuy = preload("res://shield_guy.tscn")
 var SwordGuy = preload("res://sword_guy.tscn")
 var GunGuy = preload("res://gun_guy.tscn")
+var FanGuy = preload("res://fan_guy.tscn")
 
 var GuyResourceByName = {
 	"ShieldGuy": ShieldGuy,
 	"SwordGuy": SwordGuy,
-	"GunGuy": GunGuy
+	"GunGuy": GunGuy,
+	"FanGuy": FanGuy
 }
 
 # Called when the node enters the scene tree for the first time.

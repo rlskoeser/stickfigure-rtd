@@ -2,7 +2,6 @@ extends "res://ball.gd"
 
 signal shields_up
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	start()
@@ -22,3 +21,7 @@ func _on_timer_timeout():
 	shields_up.emit()
 	# delete this ball after it turns the shield on
 	queue_free()
+#
+func push_back():
+	# blue ball is not affected by the fan
+	pass

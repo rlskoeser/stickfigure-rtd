@@ -19,9 +19,10 @@ func _on_body_entered(body):
 	hide() # ball disappears after hitting player
 
 func hit():
+	# remove the ball from the scene after running into player or shield
 	queue_free()
 	
-	## hide the ball after running into player or shield
-	#hide()
-	## turn off collision - if we hit shield, don't hit player
-	#$CollisionShape2D.set_deferred("disabled", true)
+func push_back():
+	# set the ball to fly away
+	var velocity = Vector2.LEFT.normalized() * self.speed * 2
+	self.linear_velocity = velocity
