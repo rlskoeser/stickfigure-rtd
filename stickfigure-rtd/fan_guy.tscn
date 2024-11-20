@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://cgudg0qx6pgc3" path="res://fan.tscn" id="3_ospjh"]
 
 [node name="FanGuy" instance=ExtResource("1_sn8ik")]
+position = Vector2(949, 424)
 script = ExtResource("2_exl54")
 
 [node name="HP" parent="." index="2"]
 position = Vector2(60, -69)
 
 [node name="Fan" parent="." index="4" instance=ExtResource("3_ospjh")]
-position = Vector2(-6, 77)
+position = Vector2(14, 86)
 scale = Vector2(0.25, 0.25)
