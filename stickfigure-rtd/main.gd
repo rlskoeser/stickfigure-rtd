@@ -27,24 +27,26 @@ func _process(_delta):
 
 func play_level(next=false):
 	# reset to original lineup and restart spawn timer
+	$Cannon/CannonTimer.set_paused(true)
 	$Cannon/CannonTimer.stop()
 	$Cannon.reset()
 		
-	# clear stick guys and balls still on the scene
+	# clear stick guys and bullets still in the scene
+	# (balls are children of the cannon)
 	for node in get_children():
-		if node.name.contains('Guy') or node.name.contains('ball') or node.name == "Bullet":
+		if node.name.contains('Guy') or node.name == "Bullet":
 			node.queue_free()
-			
+	
 	if next:
 		# level number goes up
 		level_num = level_num + 1
 		$LevelLabel.set_text("Level %d" % level_num)
-		# cannon gets faster (but don't go negative)
-		$Cannon.launch_wait_min = max($Cannon.launch_wait_min - 0.5, 0.25)
-		$Cannon.launch_wait_max = max($Cannon.launch_wait_max - 1, 1)
+		$Cannon.next_level()
 		
 	# add a new chooser after a delay
 	await get_tree().create_timer(1.0).timeout
+	
+	
 	current_chooser = chooser.instantiate()
 	add_child(current_chooser)
 	current_chooser.connect("go", _on_chooser_go)

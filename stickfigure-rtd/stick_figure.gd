@@ -14,17 +14,24 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	start_position = position
 	start_speed = speed
+	
+func has_weapon():
+	# by default stick guy has no weapon
+	return false
 
 func _physics_process(delta):
 	var velocity = Vector2.LEFT.normalized() * speed
 	var collide = move_and_collide(velocity * delta)
 	if (collide):
 		var body = collide.get_collider()
-
-		if "damage" in body:
+	
+		if "weapon_breaker" in body and body.weapon_breaker and self.has_weapon():
+			self.break_weapon()	
+		elif "damage" in body:
 			$HP.take_damage(body.damage)
-			if body.has_method("hit"):
-				body.hit()
+		
+		if body.has_method("hit"):
+			body.hit()
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,6 +58,9 @@ func _on_hit():
 
 func attack():
 	# default stick figure guy has no attack
+	pass
+	
+func break_weapon():
 	pass
 
 func _on_input_event(viewport, event, shape_idx):

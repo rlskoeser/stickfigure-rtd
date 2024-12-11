@@ -7,4 +7,14 @@ func _process(delta):
 	super(delta)
 
 func attack():
-	$Sword.attack()
+	# can only attack if we still have a sword!
+	if $Sword:
+		$Sword.attack()
+
+func has_weapon():
+	# sword guy has a weapon if the sword is still in the scene
+	return $Sword
+
+func break_weapon():
+	if $Sword:
+		$Sword.queue_free()

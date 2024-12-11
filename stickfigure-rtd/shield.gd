@@ -11,8 +11,22 @@ func _process(delta):
 	pass
 
 func _on_body_entered(body):
+	# break weapon logic has to be here because the rock hits the shield
+	# before it hits the shield guy
+	
+	# if we hit something that is a weapon breaker, shield is destroyed
+	if "weapon_breaker" in body and body.weapon_breaker:
+		# when hit by a weapon-breaking object (i.e. rock)
+		# shield breaks
+		
+		# remove the shield from the scene
+		queue_free()
+		# let the rock know it has been hit
+		body.hit()
+		return
+		
 	# if we hit something that does domage, subtract from hp
-	if ("damage" in body):
+	elif "damage" in body:
 		$HP.take_damage(body.damage)
 		body.hit()
 

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdyo5iif5ybc3"]
+
+[ext_resource type="PackedScene" uid="uid://bljyskro5l4x0" path="res://red_ball.tscn" id="1_y7mad"]
+[ext_resource type="Texture2D" uid="uid://brrqbpj5dmqef" path="res://assets/rock.png" id="2_h85fn"]
+[ext_resource type="Script" path="res://rock_ball.gd" id="2_p60tb"]
+
+[node name="rock_ball" instance=ExtResource("1_y7mad")]
+script = ExtResource("2_p60tb")
+weapon_breaker = true
+
+[node name="Sprite2D" parent="." index="2"]
+position = Vector2(-2, 0.999999)
+scale = Vector2(0.85, 0.450451)
+texture = ExtResource("2_h85fn")

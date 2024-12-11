@@ -3,11 +3,13 @@ extends Node
 var yellow_ball = preload("res://ball.tscn")
 var red_ball = preload("res://red_ball.tscn")
 var blue_ball = preload("res://blue_ball.tscn")
+var rock = preload("res://rock_ball.tscn")
 
 signal destroyed
 
 @export var launch_wait_min = 3
 @export var launch_wait_max = 7
+var level_num = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,28 +20,45 @@ func _process(delta):
 	pass
 
 func start():
+	$CannonTimer.set_paused(false)
 	$CannonTimer.start()
-	# position = $LaunchPosition.position
-	#show()
-	#$CollisionShape2D.disabled = false
-# Must be deferred as we can't change physics properties on a physics callback.
-	#$CollisionShape2D.set_deferred("disabled", true)# Must be deferred as we can't change physics properties on a physics callback.
-	#$CollisionShape2D.set_deferred("disabled", true)
 	
+func next_level():
+	level_num += 1 
+	# cannon gets faster (but don't go negative)
+	launch_wait_min = max(launch_wait_min - 0.5, 0.25)
+	launch_wait_max = max(launch_wait_max - 1, 1)
 	
 func choose_ball():
-	#return blue_ball
+	# debug rock breaking weapons
+	#return rock
+	
 	var random_float = randf()
 
-	if random_float <= 0.6:
-		# 60% chance of yellow being returned.
-		return yellow_ball
-	elif random_float <= 0.8:
-		# 20% chance of red being returned.
-		return red_ball
+	if level_num < 4:
+		if random_float <= 0.6:
+			# 60% chance of yellow being returned.
+			return yellow_ball
+		elif random_float <= 0.8:
+			# 20% chance of red being returned.
+			return red_ball
+		else:
+			# 20% chance of being returned.
+			return blue_ball
+	# level 4 and higher	
 	else:
-		# 20% chance of being returned.
-		return blue_ball
+		if random_float <= 0.4:
+			# 40% chance of yellow being returned.
+			return yellow_ball
+		elif random_float <= 0.6:
+			# 20% chance of red being returned.
+			return red_ball
+		elif random_float <= 0.8:
+			# 20% chance of rock being returned.
+			return rock
+		else:
+			# 20% chance of being returned.
+			return blue_ball
 
 func _on_cannon_timer_timeout():
 	# Create a new instance of the selected ball
@@ -67,6 +86,10 @@ func _on_hp_death():
 func reset():
 	$HP.reset()
 	$blue_shield.off()
+	# clear any remaining balls still on the scene
+	for node in get_children():
+		if node.name.contains('ball'):
+			node.queue_free()
 
 func _on_shields_up():
 	$blue_shield.on()

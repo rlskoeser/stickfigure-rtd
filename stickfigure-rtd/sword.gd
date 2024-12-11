@@ -18,5 +18,7 @@ func attack():
 	$AnimationPlayer.play("attack")
 
 func _on_body_entered(body):
+	print('sword body entered')
+	print(body)
 	if attacking:
 		body.take_damage(damage)

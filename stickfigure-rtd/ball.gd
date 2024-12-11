@@ -2,6 +2,7 @@ extends RigidBody2D
 
 @export var speed = 150 
 @export var damage = 1
+@export var weapon_breaker = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,9 +15,6 @@ func _process(delta):
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
-
-func _on_body_entered(body):
-	hide() # ball disappears after hitting player
 
 func hit():
 	# remove the ball from the scene after running into player or shield
