@@ -9,21 +9,26 @@ var ShieldGuy = preload("res://shield_guy.tscn")
 var SwordGuy = preload("res://sword_guy.tscn")
 var GunGuy = preload("res://gun_guy.tscn")
 var FanGuy = preload("res://fan_guy.tscn")
+var ArrowGuy = preload("res://arrow_guy.tscn")
 
 var GuyResourceByName = {
 	"ShieldGuy": ShieldGuy,
 	"SwordGuy": SwordGuy,
 	"GunGuy": GunGuy,
-	"FanGuy": FanGuy
+	"FanGuy": FanGuy,
+	"ArrowGuy":ArrowGuy
 }
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
 	# bind button press to handler and pass in the button
 	for button in $Buttons.get_children():
 		button.pressed.connect(on_button_press.bind(button))
-
+	# slots 4 and 5 are hidden by default
+	if max_picks <4:
+		$Slots/Slot4.hide()
+	if max_picks <5:
+		$Slots/Slot5.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -57,3 +62,7 @@ func pick_guy(guy):
 
 func _on_go_button_pressed() -> void:
 	go.emit(lineup)
+	
+func slots(num) -> void:
+	max_picks = num
+	

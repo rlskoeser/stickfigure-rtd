@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch6i200srns87"]
+[gd_scene load_steps=9 format=3 uid="uid://ch6i200srns87"]
 
 [ext_resource type="PackedScene" uid="uid://oj2458hw4fo7" path="res://gun_guy.tscn" id="1_4y1ey"]
 [ext_resource type="Script" path="res://chooser.gd" id="1_u3iuc"]
 [ext_resource type="PackedScene" uid="uid://cuckgvmgyddcn" path="res://shield_guy.tscn" id="2_ekr7g"]
 [ext_resource type="PackedScene" uid="uid://b850vwiej2rxe" path="res://sword_guy.tscn" id="3_f5i62"]
 [ext_resource type="PackedScene" uid="uid://dyqjkci67in0j" path="res://fan_guy.tscn" id="5_bumr1"]
+[ext_resource type="PackedScene" uid="uid://bswqildu1012y" path="res://arrow_guy.tscn" id="6_3efc1"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ajcfd"]
 
@@ -14,6 +15,12 @@
 script = ExtResource("1_u3iuc")
 
 [node name="Background" type="Polygon2D" parent="."]
+position = Vector2(-5.96046e-08, 119.889)
+scale = Vector2(1, 0.888992)
+color = Color(3.36915e-07, 0.564263, 0.327003, 1)
+polygon = PackedVector2Array(-1, -1, 1922, 1, 1919, 1077, 0, 1080)
+
+[node name="Background2" type="Polygon2D" parent="."]
 position = Vector2(-5.96046e-08, 119.889)
 scale = Vector2(1, 0.888992)
 color = Color(3.36915e-07, 0.564263, 0.327003, 1)
@@ -30,7 +37,7 @@ text = "pick your guys"
 [node name="Slots" type="Node" parent="."]
 
 [node name="Slot1" type="Polygon2D" parent="Slots"]
-position = Vector2(504.406, 240.18)
+position = Vector2(220.406, 240.18)
 scale = Vector2(0.898497, 0.909804)
 texture = SubResource("CanvasTexture_ajcfd")
 polygon = PackedVector2Array(5.22891, -0.734497, 269.229, -0.734497, 269.229, 255.266, 5.22889, 255.266)
@@ -45,7 +52,7 @@ theme_override_font_sizes/font_size = 32
 text = "1"
 
 [node name="Slot2" type="Polygon2D" parent="Slots"]
-position = Vector2(801, 241)
+position = Vector2(517, 241)
 scale = Vector2(0.898497, 0.909804)
 texture = SubResource("CanvasTexture_ajcfd")
 polygon = PackedVector2Array(5.22891, -0.734497, 269.229, -0.734497, 269.229, 255.266, 5.22889, 255.266)
@@ -61,7 +68,7 @@ text = "2
 "
 
 [node name="Slot3" type="Polygon2D" parent="Slots"]
-position = Vector2(1089, 240)
+position = Vector2(805, 240)
 scale = Vector2(0.898497, 0.909804)
 texture = SubResource("CanvasTexture_ajcfd")
 polygon = PackedVector2Array(5.22891, -0.734497, 269.229, -0.734497, 269.229, 255.266, 5.22889, 255.266)
@@ -74,6 +81,38 @@ offset_right = 144.0
 offset_bottom = -1.0
 theme_override_font_sizes/font_size = 32
 text = "3"
+
+[node name="Slot4" type="Polygon2D" parent="Slots"]
+position = Vector2(1089, 240)
+scale = Vector2(0.898497, 0.909804)
+texture = SubResource("CanvasTexture_ajcfd")
+polygon = PackedVector2Array(5.22891, -0.734497, 269.229, -0.734497, 269.229, 255.266, 5.22889, 255.266)
+uv = PackedVector2Array(6.22595, 2, 266.661, 2, 268.887, 254.802, 5.11298, 255.901)
+
+[node name="Label" type="Label" parent="Slots/Slot4"]
+offset_left = 126.0
+offset_top = -46.0
+offset_right = 144.0
+offset_bottom = -1.0
+theme_override_font_sizes/font_size = 32
+text = "4
+"
+
+[node name="Slot5" type="Polygon2D" parent="Slots"]
+position = Vector2(1366, 240)
+scale = Vector2(0.898497, 0.909804)
+texture = SubResource("CanvasTexture_ajcfd")
+polygon = PackedVector2Array(5.22891, -0.734497, 269.229, -0.734497, 269.229, 255.266, 5.22889, 255.266)
+uv = PackedVector2Array(6.22595, 2, 266.661, 2, 268.887, 254.802, 5.11298, 255.901)
+
+[node name="Label" type="Label" parent="Slots/Slot5"]
+offset_left = 126.0
+offset_top = -46.0
+offset_right = 144.0
+offset_bottom = -1.0
+theme_override_font_sizes/font_size = 32
+text = "5
+"
 
 [node name="Buttons" type="Node" parent="."]
 
@@ -90,7 +129,7 @@ offset_bottom = -0.360107
 theme_override_styles/hover = SubResource("StyleBoxFlat_2wrfy")
 
 [node name="ShieldGuy" parent="Buttons/Button1" instance=ExtResource("2_ekr7g")]
-position = Vector2(77, 59)
+position = Vector2(86, 133)
 speed = 0
 
 [node name="Button2" type="Button" parent="Buttons"]
@@ -138,11 +177,26 @@ offset_bottom = -13.36
 position = Vector2(97, 75)
 speed = 0
 
+[node name="Button5" type="Button" parent="Buttons"]
+anchors_preset = -1
+anchor_left = 0.018
+anchor_top = 0.618
+anchor_right = 0.155
+anchor_bottom = 0.967
+offset_left = 1548.44
+offset_top = -11.4399
+offset_right = 1549.4
+offset_bottom = -11.36
+
+[node name="ArrowGuy" parent="Buttons/Button5" instance=ExtResource("6_3efc1")]
+position = Vector2(74, 59.9999)
+speed = 0
+
 [node name="GoButton" type="Button" parent="."]
-offset_left = 1491.0
-offset_top = 291.0
-offset_right = 1594.0
-offset_bottom = 410.0
+offset_left = 1681.0
+offset_top = 282.0
+offset_right = 1784.0
+offset_bottom = 401.0
 theme_override_font_sizes/font_size = 81
 disabled = true
 text = "go"

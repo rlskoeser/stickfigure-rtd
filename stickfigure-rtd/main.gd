@@ -46,8 +46,11 @@ func play_level(next=false):
 	# add a new chooser after a delay
 	await get_tree().create_timer(1.0).timeout
 	
-	
 	current_chooser = chooser.instantiate()
+	if level_num >= 6:
+		current_chooser.slots(4)
+	if level_num>= 10:
+		current_chooser.slots(5)
 	add_child(current_chooser)
 	current_chooser.connect("go", _on_chooser_go)
 		
@@ -78,6 +81,11 @@ func _on_spawn_timer_timeout():
 			if node.name.contains('Gun'):
 				# connect signal handler to *this* instance
 				node.connect("shoot", _on_gun_shoot)
+	elif new_guy.name == "ArrowGuy":
+		for node in new_guy.get_children():
+			if node.name.contains('Bow'):
+				# connect signal handler to *this* instance
+				node.connect("shoot", _on_bow_shoot)		
 	# connect signal handler to *this* instance
 	add_child(new_guy)
 	if guys:
@@ -87,6 +95,11 @@ func _on_gun_shoot(Bullet, location):
 	var spawned_bullet = Bullet.instantiate()
 	spawned_bullet.position = location
 	add_child(spawned_bullet)
+	
+func _on_bow_shoot(Arrow, location):
+	var spawned_arrow = Arrow.instantiate()
+	spawned_arrow.position = location
+	add_child(spawned_arrow)
 	
 func count_active_guys():
 	# clear stick guys and balls still on the scene
