@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var velocity = Vector2.LEFT
+@export var velocity = Vector2.LEFT
 @export var speed = 350 
 @export var damage = 13
 
