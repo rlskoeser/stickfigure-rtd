@@ -6,7 +6,7 @@ var guys
 var level_num = 1
 var chooser = preload("res://chooser.tscn")
 var current_chooser
-
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# add a new chooser
@@ -53,6 +53,9 @@ func play_level(next=false):
 		current_chooser.slots(5)
 	add_child(current_chooser)
 	current_chooser.connect("go", _on_chooser_go)
+
+	# reset again in case any damage was done while clearing
+	$Cannon.reset()
 		
 func _on_cannon_destroyed():
 	show_success()
@@ -101,9 +104,11 @@ func _on_bow_shoot(Arrow, location):
 	spawned_arrow.position = location
 	add_child(spawned_arrow)
 	
-func count_active_guys():
-	# clear stick guys and balls still on the scene
-	var count = 0
+func count_remaining_guys():
+	# count the number of guys still in this level;
+	# include unspawned guys in count so we don't consider
+	# the player defeated when only on-screen guys are gone
+	var count = guys.size()
 	for node in get_children():
 		if node.name.contains('Guy'):
 			count += 1
@@ -111,9 +116,8 @@ func count_active_guys():
 
 func _on_guy_death(guy):
 	remove_child(guy)
-	var guy_count = count_active_guys()
 	# if all guys are dead and gone...
-	if guy_count == 0:
+	if count_remaining_guys() == 0:
 		# restart current level instead of going to next level
 		show_message("Defeated. Try again")
 		play_level()
