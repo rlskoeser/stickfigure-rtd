@@ -29,13 +29,11 @@ func play_level(next=false):
 	# reset to original lineup and restart spawn timer
 	$Cannon/CannonTimer.set_paused(true)
 	$Cannon/CannonTimer.stop()
-	$Cannon.reset()
 		
-	# clear stick guys and bullets still in the scene
-	# (balls are children of the cannon)
-	for node in get_children():
-		if node.name.contains('Guy') or node.name == "Bullet":
-			node.queue_free()
+	# clear all level-specific assets still in the scene,
+	# i.e., stick guys, bullets, and arrows
+	# (balls are children of the cannon scene)
+	get_tree().call_group("level_assets", "queue_free")
 	
 	if next:
 		# level number goes up
@@ -47,6 +45,7 @@ func play_level(next=false):
 	await get_tree().create_timer(1.0).timeout
 	
 	current_chooser = chooser.instantiate()
+	# as levels get higher, allow choosing more guys
 	if level_num >= 6:
 		current_chooser.slots(4)
 	if level_num>= 10:
@@ -54,7 +53,7 @@ func play_level(next=false):
 	add_child(current_chooser)
 	current_chooser.connect("go", _on_chooser_go)
 
-	# reset again in case any damage was done while clearing
+	# reset cannon
 	$Cannon.reset()
 		
 func _on_cannon_destroyed():
@@ -78,6 +77,10 @@ func _on_spawn_timer_timeout():
 	var new_guy = guys.pop_front().instantiate(); 
 	# move to spawn position and add to scene
 	new_guy.position = $SpawnPosition.position
+	# add to level asset group so we can easily clear
+	new_guy.add_to_group("level_assets")
+	# add to guys for counting
+	new_guy.add_to_group("guys")
 	new_guy.connect("death", _on_guy_death)
 	if new_guy.name == "GunGuy":
 		for node in new_guy.get_children():
@@ -97,22 +100,20 @@ func _on_spawn_timer_timeout():
 func _on_gun_shoot(Bullet, location):
 	var spawned_bullet = Bullet.instantiate()
 	spawned_bullet.position = location
+	spawned_bullet.add_to_group("level_assets")
 	add_child(spawned_bullet)
 	
 func _on_bow_shoot(Arrow, location):
 	var spawned_arrow = Arrow.instantiate()
 	spawned_arrow.position = location
+	spawned_arrow.add_to_group("level_assets")
 	add_child(spawned_arrow)
 	
 func count_remaining_guys():
 	# count the number of guys still in this level;
 	# include unspawned guys in count so we don't consider
 	# the player defeated when only on-screen guys are gone
-	var count = guys.size()
-	for node in get_children():
-		if node.name.contains('Guy'):
-			count += 1
-	return count
+	return guys.size() + get_tree().get_nodes_in_group("guys").size()
 
 func _on_guy_death(guy):
 	remove_child(guy)

@@ -63,6 +63,7 @@ func choose_ball():
 func _on_cannon_timer_timeout():
 	# Create a new instance of the selected ball
 	var ball = choose_ball().instantiate()
+	ball.add_to_group("cannon_assets")
 	# connect signal handler to *this* instance
 	if ball.name == "blue_ball":
 		ball.connect("shields_up", _on_shields_up)
@@ -84,12 +85,13 @@ func _on_hp_death():
 	destroyed.emit()
 	
 func reset():
+	# set hit points back to starting value
 	$HP.reset()
+	# turn off the shield
 	$blue_shield.off()
 	# clear any remaining balls still on the scene
-	for node in get_children():
-		if node.name.contains('ball'):
-			node.queue_free()
+	get_tree().call_group("cannon_assets", "queue_free")
+
 
 func _on_shields_up():
 	$blue_shield.on()
