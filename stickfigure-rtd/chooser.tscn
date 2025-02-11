@@ -1,30 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://ch6i200srns87"]
+[gd_scene load_steps=9 format=3 uid="uid://ch6i200srns87"]
 
 [ext_resource type="PackedScene" uid="uid://oj2458hw4fo7" path="res://gun_guy.tscn" id="1_4y1ey"]
 [ext_resource type="Script" path="res://chooser.gd" id="1_u3iuc"]
 [ext_resource type="PackedScene" uid="uid://cuckgvmgyddcn" path="res://shield_guy.tscn" id="2_ekr7g"]
+[ext_resource type="Theme" uid="uid://dxjexkir763tj" path="res://chooser.theme" id="2_sj0n6"]
 [ext_resource type="PackedScene" uid="uid://b850vwiej2rxe" path="res://sword_guy.tscn" id="3_f5i62"]
 [ext_resource type="PackedScene" uid="uid://dyqjkci67in0j" path="res://fan_guy.tscn" id="5_bumr1"]
 [ext_resource type="PackedScene" uid="uid://bswqildu1012y" path="res://arrow_guy.tscn" id="6_3efc1"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ajcfd"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wrfy"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8tty"]
-bg_color = Color(0.956603, 0.794529, 0.345021, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d35bc"]
-bg_color = Color(0.956863, 0.796078, 0.345098, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ap62i"]
-bg_color = Color(0.956863, 0.796078, 0.345098, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qupp"]
-bg_color = Color(0.956863, 0.796078, 0.345098, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qf627"]
-bg_color = Color(0.956863, 0.796078, 0.345098, 1)
 
 [node name="Chooser" type="Node"]
 script = ExtResource("1_u3iuc")
@@ -141,8 +125,7 @@ offset_left = -0.0400085
 offset_top = -13.4399
 offset_right = 0.919983
 offset_bottom = 0.47998
-theme_override_styles/hover = SubResource("StyleBoxFlat_2wrfy")
-theme_override_styles/normal = SubResource("StyleBoxFlat_v8tty")
+theme = ExtResource("2_sj0n6")
 
 [node name="ShieldGuy" parent="Buttons/Button1" instance=ExtResource("2_ekr7g")]
 position = Vector2(80, 65)
@@ -158,7 +141,7 @@ offset_left = 0.23996
 offset_top = -13.4399
 offset_right = -0.720032
 offset_bottom = 6.79993
-theme_override_styles/normal = SubResource("StyleBoxFlat_d35bc")
+theme = ExtResource("2_sj0n6")
 
 [node name="SwordGuy" parent="Buttons/Button2" instance=ExtResource("3_f5i62")]
 position = Vector2(80, 65)
@@ -184,7 +167,7 @@ offset_left = 0.479858
 offset_top = -10.4399
 offset_right = -0.47998
 offset_bottom = 0.159973
-theme_override_styles/normal = SubResource("StyleBoxFlat_ap62i")
+theme = ExtResource("2_sj0n6")
 
 [node name="GunGuy" parent="Buttons/Button3" instance=ExtResource("1_4y1ey")]
 position = Vector2(80, 65)
@@ -209,7 +192,7 @@ offset_left = 0.679932
 offset_top = -0.479919
 offset_right = -0.280029
 offset_bottom = 0.399963
-theme_override_styles/normal = SubResource("StyleBoxFlat_1qupp")
+theme = ExtResource("2_sj0n6")
 
 [node name="FanGuy" parent="Buttons/Button4" instance=ExtResource("5_bumr1")]
 position = Vector2(80, 65)
@@ -225,7 +208,7 @@ offset_left = 0.759888
 offset_top = -9.43994
 offset_right = -0.200073
 offset_bottom = -0.400085
-theme_override_styles/normal = SubResource("StyleBoxFlat_qf627")
+theme = ExtResource("2_sj0n6")
 
 [node name="ArrowGuy" parent="Buttons/Button5" instance=ExtResource("6_3efc1")]
 position = Vector2(80, 65)
@@ -251,14 +234,13 @@ text = "go"
 
 [node name="Label2" type="Label" parent="."]
 anchors_preset = -1
-anchor_left = 0.349
-anchor_top = 0.91
-anchor_right = 0.628
-anchor_bottom = 0.952
-offset_left = 0.919983
-offset_top = 0.199951
-offset_right = 0.23999
-offset_bottom = -0.160034
+anchor_left = 0.387
+anchor_top = 0.908
+anchor_right = 0.574
+anchor_bottom = 0.95
+offset_left = 15.96
+offset_top = 0.359924
+offset_right = 0.920044
 theme_override_font_sizes/font_size = 32
 text = "* tap or click to attack"
 
