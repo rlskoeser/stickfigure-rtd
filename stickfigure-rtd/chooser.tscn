@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ch6i200srns87"]
+[gd_scene load_steps=14 format=3 uid="uid://ch6i200srns87"]
 
 [ext_resource type="PackedScene" uid="uid://oj2458hw4fo7" path="res://gun_guy.tscn" id="1_4y1ey"]
 [ext_resource type="Script" path="res://chooser.gd" id="1_u3iuc"]
@@ -10,6 +10,21 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_ajcfd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wrfy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8tty"]
+bg_color = Color(0.956603, 0.794529, 0.345021, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d35bc"]
+bg_color = Color(0.956863, 0.796078, 0.345098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ap62i"]
+bg_color = Color(0.956863, 0.796078, 0.345098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qupp"]
+bg_color = Color(0.956863, 0.796078, 0.345098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qf627"]
+bg_color = Color(0.956863, 0.796078, 0.345098, 1)
 
 [node name="Chooser" type="Node"]
 script = ExtResource("1_u3iuc")
@@ -127,6 +142,7 @@ offset_top = -13.4399
 offset_right = 0.919983
 offset_bottom = 0.47998
 theme_override_styles/hover = SubResource("StyleBoxFlat_2wrfy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_v8tty")
 
 [node name="ShieldGuy" parent="Buttons/Button1" instance=ExtResource("2_ekr7g")]
 position = Vector2(80, 65)
@@ -142,10 +158,21 @@ offset_left = 0.23996
 offset_top = -13.4399
 offset_right = -0.720032
 offset_bottom = 6.79993
+theme_override_styles/normal = SubResource("StyleBoxFlat_d35bc")
 
 [node name="SwordGuy" parent="Buttons/Button2" instance=ExtResource("3_f5i62")]
 position = Vector2(80, 65)
 speed = 0
+
+[node name="attack hint" type="Label" parent="Buttons/Button2"]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 237.0
+offset_right = 263.0
+offset_bottom = 282.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "*"
 
 [node name="Button3" type="Button" parent="Buttons"]
 anchors_preset = -1
@@ -157,10 +184,20 @@ offset_left = 0.479858
 offset_top = -10.4399
 offset_right = -0.47998
 offset_bottom = 0.159973
+theme_override_styles/normal = SubResource("StyleBoxFlat_ap62i")
 
 [node name="GunGuy" parent="Buttons/Button3" instance=ExtResource("1_4y1ey")]
 position = Vector2(80, 65)
 speed = 0
+
+[node name="attack hint" type="Label" parent="Buttons/Button3"]
+offset_left = 223.0
+offset_top = 237.0
+offset_right = 263.0
+offset_bottom = 282.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "*"
 
 [node name="Button4" type="Button" parent="Buttons"]
 anchors_preset = -1
@@ -172,6 +209,7 @@ offset_left = 0.679932
 offset_top = -0.479919
 offset_right = -0.280029
 offset_bottom = 0.399963
+theme_override_styles/normal = SubResource("StyleBoxFlat_1qupp")
 
 [node name="FanGuy" parent="Buttons/Button4" instance=ExtResource("5_bumr1")]
 position = Vector2(80, 65)
@@ -187,10 +225,20 @@ offset_left = 0.759888
 offset_top = -9.43994
 offset_right = -0.200073
 offset_bottom = -0.400085
+theme_override_styles/normal = SubResource("StyleBoxFlat_qf627")
 
 [node name="ArrowGuy" parent="Buttons/Button5" instance=ExtResource("6_3efc1")]
 position = Vector2(80, 65)
 speed = 0
+
+[node name="attack hint" type="Label" parent="Buttons/Button5"]
+offset_left = 223.0
+offset_top = 237.0
+offset_right = 263.0
+offset_bottom = 282.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "*"
 
 [node name="GoButton" type="Button" parent="."]
 offset_left = 1681.0
@@ -200,6 +248,19 @@ offset_bottom = 401.0
 theme_override_font_sizes/font_size = 81
 disabled = true
 text = "go"
+
+[node name="Label2" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.349
+anchor_top = 0.91
+anchor_right = 0.628
+anchor_bottom = 0.952
+offset_left = 0.919983
+offset_top = 0.199951
+offset_right = 0.23999
+offset_bottom = -0.160034
+theme_override_font_sizes/font_size = 32
+text = "* tap or click to attack"
 
 [connection signal="pressed" from="Buttons/Button1" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Buttons/Button2" to="." method="_on_button_pressed"]
