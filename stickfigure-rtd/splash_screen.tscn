@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://dghks6qypo5fc"]
+
+[ext_resource type="Script" path="res://splash_screen.gd" id="1_s7i0d"]
+[ext_resource type="PackedScene" uid="uid://bswqildu1012y" path="res://arrow_guy.tscn" id="1_v7hgt"]
+[ext_resource type="PackedScene" uid="uid://oj2458hw4fo7" path="res://gun_guy.tscn" id="2_5iwep"]
+[ext_resource type="PackedScene" uid="uid://b850vwiej2rxe" path="res://sword_guy.tscn" id="3_bbs2v"]
+[ext_resource type="PackedScene" uid="uid://mit3qx6l6ax3" path="res://arrow.tscn" id="3_d1wmu"]
+[ext_resource type="PackedScene" uid="uid://dyqjkci67in0j" path="res://fan_guy.tscn" id="4_66jll"]
+[ext_resource type="PackedScene" uid="uid://cuckgvmgyddcn" path="res://shield_guy.tscn" id="5_5qpw2"]
+[ext_resource type="PackedScene" uid="uid://bivsavrxdovmf" path="res://bullet.tscn" id="5_jlpra"]
+[ext_resource type="PackedScene" uid="uid://t1t4a8j630s2" path="res://cannon.tscn" id="6_vrr4y"]
+[ext_resource type="PackedScene" uid="uid://bs31uqla2b4np" path="res://ball.tscn" id="9_u72ig"]
+[ext_resource type="PackedScene" uid="uid://bigkg5fkrypsq" path="res://blue_ball.tscn" id="10_vorpw"]
+[ext_resource type="PackedScene" uid="uid://doqy2gmrtnft5" path="res://blue_shield.tscn" id="11_41jlg"]
+[ext_resource type="PackedScene" uid="uid://bljyskro5l4x0" path="res://red_ball.tscn" id="12_0r06e"]
+[ext_resource type="PackedScene" uid="uid://bdyo5iif5ybc3" path="res://rock_ball.tscn" id="13_gmima"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_s7i0d")
+
+[node name="Background2" type="Polygon2D" parent="."]
+position = Vector2(-5.96046e-08, 119.889)
+scale = Vector2(1, 0.888992)
+color = Color(0.821789, 0.821789, 0.821789, 1)
+polygon = PackedVector2Array(-1, -1, 1922, 1, 1919, 1077, 0, 1080)
+
+[node name="Cannon" parent="." instance=ExtResource("6_vrr4y")]
+
+[node name="Guys" type="CanvasGroup" parent="."]
+position = Vector2(260, -53)
+
+[node name="ArrowGuy" parent="Guys" instance=ExtResource("1_v7hgt")]
+position = Vector2(1296, 488)
+speed = 0
+
+[node name="Arrow" parent="Guys/ArrowGuy" instance=ExtResource("3_d1wmu")]
+position = Vector2(-94, -108)
+gravity_scale = 0.0
+speed = 0
+
+[node name="Arrow2" parent="Guys/ArrowGuy" instance=ExtResource("3_d1wmu")]
+position = Vector2(-395, -185)
+rotation = -0.645772
+gravity_scale = 0.0
+speed = 0
+
+[node name="GunGuy" parent="Guys" instance=ExtResource("2_5iwep")]
+position = Vector2(1143, 490)
+speed = 0
+
+[node name="Bullet3" parent="Guys/GunGuy" instance=ExtResource("5_jlpra")]
+position = Vector2(-418, 78)
+speed = 0
+
+[node name="Bullet2" parent="Guys/GunGuy" instance=ExtResource("5_jlpra")]
+position = Vector2(-222, 76)
+speed = 0
+
+[node name="Bullet" parent="Guys/GunGuy" instance=ExtResource("5_jlpra")]
+position = Vector2(-26, 74)
+speed = 0
+
+[node name="SwordGuy" parent="Guys" instance=ExtResource("3_bbs2v")]
+position = Vector2(1458, 479)
+speed = 0
+
+[node name="FanGuy" parent="Guys" instance=ExtResource("4_66jll")]
+position = Vector2(980, 493)
+speed = 0
+
+[node name="ShieldGuy" parent="Guys" instance=ExtResource("5_5qpw2")]
+position = Vector2(801, 490)
+speed = 0
+
+[node name="balls" type="CanvasGroup" parent="."]
+position = Vector2(-17, -67)
+
+[node name="ball2" parent="balls" instance=ExtResource("9_u72ig")]
+position = Vector2(889, 519)
+speed = 0
+
+[node name="ball3" parent="balls" instance=ExtResource("9_u72ig")]
+position = Vector2(550, 527)
+speed = 0
+
+[node name="ball" parent="balls" instance=ExtResource("9_u72ig")]
+position = Vector2(834, 521)
+speed = 0
+
+[node name="rock_ball" parent="balls" instance=ExtResource("13_gmima")]
+position = Vector2(631, 525)
+speed = 0
+
+[node name="red_ball" parent="balls" instance=ExtResource("12_0r06e")]
+position = Vector2(744, 522)
+speed = 0
+
+[node name="blue_ball" parent="balls" instance=ExtResource("10_vorpw")]
+position = Vector2(387, 543)
+speed = 0
+
+[node name="blue_shield" parent="balls/blue_ball" instance=ExtResource("11_41jlg")]
