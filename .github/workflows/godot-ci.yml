@@ -5,7 +5,7 @@ on:
       - main
 
 env:
-  GODOT_VERSION: 4.2.1
+  GODOT_VERSION: 4.3
   EXPORT_NAME: stickfigure-rtd
   PROJECT_PATH: stickfigure-rtd
 
@@ -64,7 +64,7 @@ jobs:
     name: Web Export
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:4.2.1
+      image: barichello/godot-ci:4.3
     steps:
       - name: Checkout
         uses: actions/checkout@v4
