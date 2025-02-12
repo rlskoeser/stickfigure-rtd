@@ -63,7 +63,9 @@ func choose_ball():
 func _on_cannon_timer_timeout():
 	# Create a new instance of the selected ball
 	var ball = choose_ball().instantiate()
-	ball.add_to_group("cannon_assets")
+	# add to level assets group so main level wlll clear 
+	# on new / restart level
+	ball.add_to_group("level_assets")
 	# connect signal handler to *this* instance
 	if ball.name == "blue_ball":
 		ball.connect("shields_up", _on_shields_up)
@@ -89,9 +91,9 @@ func reset():
 	$HP.reset()
 	# turn off the shield
 	$blue_shield.off()
-	# clear any remaining balls still on the scene
-	get_tree().call_group("cannon_assets", "queue_free")
-
+	# any balls left on the scene are automatically
+	# cleared by main next level method
+	# as members of level_assets group
 
 func _on_shields_up():
 	$blue_shield.on()

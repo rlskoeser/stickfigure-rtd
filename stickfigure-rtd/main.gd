@@ -42,6 +42,8 @@ func play_level(next=false):
 		$Cannon.next_level()
 		
 	# add a new chooser after a delay
+	# - this is to avoid clicking to attack turning into 
+	#   choosing a guy by accident
 	await get_tree().create_timer(1.0).timeout
 	
 	current_chooser = chooser.instantiate()
