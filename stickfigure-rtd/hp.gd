@@ -16,7 +16,7 @@ func _process(delta):
 
 
 func update(n):
-	health = n
+	health = max(n, 0)   # never go below 0 HP
 	$Label.text = str(health)
 	
 	# handle HP zero
